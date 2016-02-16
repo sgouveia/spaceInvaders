@@ -1,3 +1,5 @@
+package org.academiadecodigo.bootcamp.spaceinvaders;
+
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
@@ -12,11 +14,19 @@ public class Board {
     private int width;
     private int heigth;
 
+    /**
+     * Constructor
+     * @param width in pixels
+     * @param heigth in pixels
+     */
     public Board(int width, int heigth) {
         this.width = width;
         this.heigth = heigth;
     }
 
+    /**
+     * Initializes the game board
+     */
     public void init(){
         Rectangle board = new Rectangle(MARGIN_LEFT, MARGIN_TOP, MARGIN_LEFT + width, MARGIN_TOP + heigth);
         board.setColor(Color.BLACK);

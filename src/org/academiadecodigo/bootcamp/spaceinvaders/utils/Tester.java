@@ -1,4 +1,4 @@
-package utils;
+package org.academiadecodigo.bootcamp.spaceinvaders.utils;
 
 /**
  * Created by codecadet on 15/02/16.
