@@ -12,18 +12,17 @@ public class Game {
     //TODO Método para devolver a representação mais à direita e mais à esquerda (getMostRightX)
 
     public static final int GAME_SPEED = 20;
-    public static final int NUMBER_OF_ALIENS = 10;
+    public static final int NUMBER_OF_ALIENS = 50;
     public static final int DELAY = 200;
 
     Board board = new Board(672, 768);
     EarthShip earthShip;
-    RepresentablesArray aliensRow1;
-    RepresentablesArray aliensRow2;
-    RepresentablesArray aliensRow3;
-    RepresentablesArray aliensRow4;
-    RepresentablesArray aliensRow5;
+    RepresentablesArray aliens;
 
 
+    /**
+     * Initializes the board and positions game objects on it;
+     */
     public void init() {
 
         board.init();
@@ -31,47 +30,19 @@ public class Game {
         RepresentationFactory factory = new SimpleGfxRepresentationFactory();
         earthShip = new EarthShip(factory.getGameObject(GameObjectType.EARTHSHIP, 344, 710));
 
+        aliens = new RepresentablesArray(NUMBER_OF_ALIENS);
 
+        int positionerX = 50;
+        int positionerY = 100;
+        for (int i = 0; i < NUMBER_OF_ALIENS / 10; i++) {
+            for (int j = 0; j < NUMBER_OF_ALIENS / 5; j++) {
 
-        aliensRow1 = new RepresentablesArray(NUMBER_OF_ALIENS);
-        aliensRow2 = new RepresentablesArray(NUMBER_OF_ALIENS);
-        aliensRow3 = new RepresentablesArray(NUMBER_OF_ALIENS);
-        aliensRow4 = new RepresentablesArray(NUMBER_OF_ALIENS);
-        aliensRow5 = new RepresentablesArray(NUMBER_OF_ALIENS);
-
-
-        //TODO For dentro do for
-        int positioner = 50;
-        for (int i = 0; i < NUMBER_OF_ALIENS; i++) {
-            aliensRow1.push(factory.getGameObject(GameObjectType.ALIEN, positioner, 100));
-            positioner += 60;
+                aliens.push(new Alien(factory.getGameObject(GameObjectType.ALIEN, positionerX, positionerY)));
+                positionerX += 60;
+            }
+            positionerX = 50;
+            positionerY += 50;
         }
-
-        positioner = 50;
-        for (int i = 0; i < NUMBER_OF_ALIENS; i++) {
-            aliensRow2.push(factory.getGameObject(GameObjectType.ALIEN, positioner, 150));
-            positioner += 60;
-        }
-
-        positioner = 50;
-        for (int i = 0; i < NUMBER_OF_ALIENS; i++) {
-            aliensRow3.push(factory.getGameObject(GameObjectType.ALIEN, positioner, 200));
-            positioner += 60;
-        }
-
-        positioner = 50;
-        for (int i = 0; i < NUMBER_OF_ALIENS; i++) {
-            aliensRow4.push(factory.getGameObject(GameObjectType.ALIEN, positioner, 250));
-            positioner += 60;
-        }
-
-        positioner = 50;
-        for (int i = 0; i < NUMBER_OF_ALIENS; i++) {
-            aliensRow5.push(factory.getGameObject(GameObjectType.ALIEN, positioner, 300));
-            positioner += 60;
-        }
-
-
     }
 
     public void start() throws InterruptedException {
@@ -80,17 +51,22 @@ public class Game {
             //TODO Move all aliens;
             //TODO Check Collider
 
+            for (int i = 0; i < aliens.getAliens().length; i++) {
+                aliens.getAliens()[i].moveRight();
+            }
 
             if (earthShip.hasShot()) {
                 earthShip.shoot();
             }
 
 
-
             // quando o tiro acerta em algum inimigo, ou sai do mapa -- earthship.doneShooting();
         }
     }
 
+    private void getMostRightX(){
+
+    }
 
 }
 

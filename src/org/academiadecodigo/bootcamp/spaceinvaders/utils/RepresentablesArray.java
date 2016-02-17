@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.utils;
 
+import org.academiadecodigo.bootcamp.spaceinvaders.gameobjects.Alien;
 import org.academiadecodigo.bootcamp.spaceinvaders.gameobjects.Representable;
 
 /**
@@ -7,22 +8,26 @@ import org.academiadecodigo.bootcamp.spaceinvaders.gameobjects.Representable;
  */
 public class RepresentablesArray {
 
-    private Representable[] representables;
+    private Alien[] aliens;
     private int nextIndex;
 
 
     public RepresentablesArray(int maxSize) {
 
-        representables = new Representable[maxSize];
+        aliens = new Alien[maxSize];
     }
 
-    public void push(Representable object) {
+    public Alien[] getAliens() {
+        return aliens;
+    }
 
-        if(nextIndex == representables.length){
+    public void push(Alien object) {
+
+        if(nextIndex == aliens.length){
             return;
         }
 
-        representables[nextIndex] = object;
+        aliens[nextIndex] = object;
         nextIndex++;
 
     }

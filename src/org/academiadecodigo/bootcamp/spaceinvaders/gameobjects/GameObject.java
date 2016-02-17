@@ -16,6 +16,10 @@ public abstract class GameObject {
         this.representation = representation;
     }
 
+    public Representable getRepresentation() {
+        return representation;
+    }
+
     public  void setDirection(Direction direction){
         this.direction = direction;
     }

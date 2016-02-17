@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 
 import org.academiadecodigo.bootcamp.spaceinvaders.Game;
+import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.*;
 import org.academiadecodigo.bootcamp.spaceinvaders.utils.RepresentablesArray;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -62,6 +63,9 @@ public class EarthShip extends GameObject implements KeyboardHandler {
         if (hasShot()) {
             return;
         }
+
+
+
 
 
 

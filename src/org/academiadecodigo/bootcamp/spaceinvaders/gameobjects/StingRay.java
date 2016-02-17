@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 
 import org.academiadecodigo.bootcamp.spaceinvaders.Game;
+import org.academiadecodigo.simplegraphics.graphics.Shape;
 
 /**
  * Created by codecadet on 15/02/16.
@@ -12,6 +13,7 @@ public class StingRay extends GameObject {
 
     public StingRay(Representable representation) {
         super(representation);
+
         speed = Game.GAME_SPEED * 3;
     }
 

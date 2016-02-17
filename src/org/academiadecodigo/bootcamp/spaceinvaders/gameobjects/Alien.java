@@ -22,21 +22,24 @@ public class Alien extends GameObject {
 
 
     public void moveRight() {
+
         for (int i = 0; i < speed; i++) {
+
+
             this.move(Direction.RIGHT);
         }
     }
 
     public void moveLeft() {
-        for (int i = 0; i < speed; i++) {
+
             this.move(Direction.LEFT);
-        }
+
     }
 
     public void moveDown() {
-        for (int i = 0; i < speed; i++) {
+
             this.move(Direction.DOWN);
-        }
+
     }
 
 
