@@ -6,13 +6,13 @@ import org.academiadecodigo.bootcamp.spaceinvaders.gameobjects.Representable;
 /**
  * Created by codecadet on 16/02/16.
  */
-public class RepresentablesArray {
+public class AliensArray {
 
     private Alien[] aliens;
     private int nextIndex;
 
 
-    public RepresentablesArray(int maxSize) {
+    public AliensArray(int maxSize) {
 
         aliens = new Alien[maxSize];
     }

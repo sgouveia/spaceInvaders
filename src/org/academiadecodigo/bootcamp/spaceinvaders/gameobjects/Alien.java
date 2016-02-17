@@ -18,13 +18,15 @@ public class Alien extends GameObject {
 
         super(representation);
         speed = Game.GAME_SPEED;
+        setDirection(Direction.RIGHT);
     }
+
+
 
 
     public void moveRight() {
 
         for (int i = 0; i < speed; i++) {
-
 
             this.move(Direction.RIGHT);
         }
@@ -32,8 +34,11 @@ public class Alien extends GameObject {
 
     public void moveLeft() {
 
-            this.move(Direction.LEFT);
+        for (int i = 0; i < speed ; i++) {
 
+
+            this.move(Direction.LEFT);
+        }
     }
 
     public void moveDown() {

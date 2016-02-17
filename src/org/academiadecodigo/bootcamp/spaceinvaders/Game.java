@@ -2,7 +2,7 @@ package org.academiadecodigo.bootcamp.spaceinvaders;
 
 import org.academiadecodigo.bootcamp.spaceinvaders.gameobjects.*;
 import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.SimpleGfxRepresentationFactory;
-import org.academiadecodigo.bootcamp.spaceinvaders.utils.RepresentablesArray;
+import org.academiadecodigo.bootcamp.spaceinvaders.utils.AliensArray;
 
 /**
  * Created by codecadet on 15/02/16.
@@ -17,7 +17,7 @@ public class Game {
 
     Board board = new Board(672, 768);
     EarthShip earthShip;
-    RepresentablesArray aliens;
+    AliensArray aliens;
 
 
     /**
@@ -30,7 +30,7 @@ public class Game {
         RepresentationFactory factory = new SimpleGfxRepresentationFactory();
         earthShip = new EarthShip(factory.getGameObject(GameObjectType.EARTHSHIP, 344, 710));
 
-        aliens = new RepresentablesArray(NUMBER_OF_ALIENS);
+        aliens = new AliensArray(NUMBER_OF_ALIENS);
 
         int positionerX = 50;
         int positionerY = 100;
@@ -52,7 +52,21 @@ public class Game {
             //TODO Check Collider
 
             for (int i = 0; i < aliens.getAliens().length; i++) {
-                aliens.getAliens()[i].moveRight();
+
+                if (aliens.getAliens()[i].getDirection().equals(Direction.RIGHT)) {
+                    if (getMostRightX() < Board.width) {
+                        aliens.getAliens()[i].moveRight();
+                    } else {
+                        aliens.getAliens()[i].moveLeft();
+                    }
+                } else {
+                    if (getMostLefttX() > 0) {
+                        aliens.getAliens()[i].moveLeft();
+                    } else {
+                        aliens.getAliens()[i].moveRight();
+                    }
+
+                }
             }
 
             if (earthShip.hasShot()) {
@@ -62,12 +76,30 @@ public class Game {
 
             // quando o tiro acerta em algum inimigo, ou sai do mapa -- earthship.doneShooting();
         }
-    }
 
-    private void getMostRightX(){
 
     }
 
+    private int getMostRightX() {
+        int x = 0;
+        for (int i = 0; i < aliens.getAliens().length; i++) {
+            if (aliens.getAliens()[i].getRepresentation().getX() > x) {
+                x = aliens.getAliens()[i].getRepresentation().getX();
+            }
+        }
+        return x;
+    }
+
+
+    private int getMostLefttX() {
+        int x = Board.width;
+        for (int i = 0; i < aliens.getAliens().length; i++) {
+            if (aliens.getAliens()[i].getRepresentation().getX() < x) {
+                x = aliens.getAliens()[i].getRepresentation().getX();
+            }
+        }
+        return x;
+    }
 }
 
 

@@ -1,8 +1,7 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 
 import org.academiadecodigo.bootcamp.spaceinvaders.Game;
-import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.*;
-import org.academiadecodigo.bootcamp.spaceinvaders.utils.RepresentablesArray;
+import org.academiadecodigo.bootcamp.spaceinvaders.utils.AliensArray;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -16,7 +15,7 @@ public class EarthShip extends GameObject implements KeyboardHandler {
 
     private int speed;
     private boolean shot;
-    private RepresentablesArray stingRays;
+    private AliensArray stingRays;
 
     public EarthShip(Representable representation){
         super(representation);

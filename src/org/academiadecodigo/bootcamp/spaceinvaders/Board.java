@@ -11,8 +11,8 @@ public class Board {
     private static final double MARGIN_TOP = 10;
     private static final double MARGIN_LEFT = 10;
 
-    private int width;
-    private int heigth;
+    public static int width;
+    public static int heigth;
 
     /**
      * Constructor
@@ -20,8 +20,8 @@ public class Board {
      * @param heigth in pixels
      */
     public Board(int width, int heigth) {
-        this.width = width;
-        this.heigth = heigth;
+        Board.width = width;
+        Board.heigth = heigth;
     }
 
     /**
