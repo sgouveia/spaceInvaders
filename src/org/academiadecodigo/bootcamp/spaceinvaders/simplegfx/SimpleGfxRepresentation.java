@@ -1,6 +1,8 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.simplegfx;
 
 import org.academiadecodigo.bootcamp.spaceinvaders.gameobjects.Representable;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Colorable;
 import org.academiadecodigo.simplegraphics.graphics.Movable;
 import org.academiadecodigo.simplegraphics.graphics.Shape;
 
@@ -16,6 +18,9 @@ public class SimpleGfxRepresentation implements Representable {
     public void setShape(Shape shape){
         this.shape = shape;
         shape.draw();
+        if(this instanceof Colorable){
+            ((Colorable)this).setColor(Color.WHITE);
+        }
     }
 
     @Override

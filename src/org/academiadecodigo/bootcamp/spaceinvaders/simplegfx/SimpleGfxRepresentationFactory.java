@@ -20,6 +20,8 @@ public class SimpleGfxRepresentationFactory implements RepresentationFactory {
                 break;
             case ALIEN: shape = new Alien(x, y, "alien01.png");
                 break;
+            case STINGRAY: shape = new StingRay(x,y,x,y-20);
+                break;
 
         }
 

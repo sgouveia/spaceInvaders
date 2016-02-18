@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 
 import org.academiadecodigo.bootcamp.spaceinvaders.Game;
+import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.SimpleGfxRepresentationFactory;
 import org.academiadecodigo.bootcamp.spaceinvaders.utils.AliensArray;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -15,12 +16,18 @@ public class EarthShip extends GameObject implements KeyboardHandler {
 
     private int speed;
     private boolean shot;
-    private AliensArray stingRays;
+    private SimpleGfxRepresentationFactory factory;
+    private StingRay stingRay;
 
+    /**
+     * Constructor
+     * @param representation -
+     */
     public EarthShip(Representable representation){
         super(representation);
-        speed = Game.GAME_SPEED;
+        speed = Game.GAME_SPEED + 20;
         setKeyboard();
+        factory = new SimpleGfxRepresentationFactory();
     }
 
 
@@ -59,16 +66,14 @@ public class EarthShip extends GameObject implements KeyboardHandler {
 
     public void shoot(){
 
+        stingRay = new StingRay (factory.getGameObject(GameObjectType.STINGRAY, getRepresentation().getX(), getRepresentation().getY()));
+        stingRay.moveUp();
+        System.out.println("done shooting");
         if (hasShot()) {
             return;
         }
+        }
 
-
-
-
-
-
-    }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {

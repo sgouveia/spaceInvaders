@@ -14,7 +14,7 @@ public class StingRay extends GameObject {
     public StingRay(Representable representation) {
         super(representation);
 
-        speed = Game.GAME_SPEED * 3;
+        speed = Game.GAME_SPEED ;
     }
 
         public void moveUp(){

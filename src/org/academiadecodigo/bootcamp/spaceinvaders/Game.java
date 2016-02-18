@@ -11,7 +11,7 @@ public class Game {
 
     //TODO Método para devolver a representação mais à direita e mais à esquerda (getMostRightX)
 
-    public static final int GAME_SPEED = 20;
+    public static final int GAME_SPEED = 5;
     public static final int NUMBER_OF_ALIENS = 50;
     public static final int DELAY = 200;
 
@@ -54,13 +54,14 @@ public class Game {
             for (int i = 0; i < aliens.getAliens().length; i++) {
 
                 if (aliens.getAliens()[i].getDirection().equals(Direction.RIGHT)) {
-                    if (getMostRightX() < Board.width) {
+                    if (getMostRightX() < Board.width-20) {
                         aliens.getAliens()[i].moveRight();
                     } else {
                         aliens.getAliens()[i].moveLeft();
+
                     }
                 } else {
-                    if (getMostLefttX() > 0) {
+                    if (getMostLefttX() > 20) {
                         aliens.getAliens()[i].moveLeft();
                     } else {
                         aliens.getAliens()[i].moveRight();
@@ -69,8 +70,10 @@ public class Game {
                 }
             }
 
+
             if (earthShip.hasShot()) {
                 earthShip.shoot();
+
             }
 
 

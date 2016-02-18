@@ -22,32 +22,37 @@ public class Alien extends GameObject {
     }
 
 
-
-
+    /**
+     * Moves alien to the right by speed value
+     */
     public void moveRight() {
 
         for (int i = 0; i < speed; i++) {
-
             this.move(Direction.RIGHT);
         }
     }
 
+    /**
+     * Moves alien to the left by speed value;
+     */
     public void moveLeft() {
 
         for (int i = 0; i < speed ; i++) {
-
-
             this.move(Direction.LEFT);
         }
     }
 
+    /**
+     * Moves alien down by speed value;
+     */
     public void moveDown() {
-
             this.move(Direction.DOWN);
-
     }
 
-
+    /**
+     * increase speed at each turn;
+     * @param speed
+     */
     public void increaseSpeed(int speed) {
         speed += 5;
     }
