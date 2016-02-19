@@ -3,29 +3,64 @@ package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 import org.academiadecodigo.simplegraphics.graphics.Shape;
 
 /**
- * Created by codecadet on 15/02/16.
+ * Created by Sérgio Gouveia on 15/02/16.
  */
 public interface Representable {
 
-    public int getX();
+    /**
+     * Getters and Setters;
+     *
+     * @return
+     */
+    int getX();
 
-    public int getY();
+    int getY();
 
-    public void move(int x, int y);
+    int getHeight();
 
-    public void draw();
+    int getWidth();
 
-    public int getHeight();
+    //TODO: this getter turns some of the methods in this interface obsolete. Refactor the whole project :(
+    Shape getShape();
 
-    public int getWidth();
+    /**
+     * Moves representation as set by the game objects
+     *
+     * @param x (delta values for x)
+     * @param y (delta values for y)
+     */
+    void move(int x, int y);
 
-    public boolean contains(int x, int y);
+    /**
+     * draws shape as set in game objects;
+     */
+    void draw();
 
-    public void setCenterXY(int x, int y);
+    /**
+     * Checks if this shape is merged by another
+     *
+     * @param centerX
+     * @param centerY
+     * @return
+     */
+    boolean contains(int centerX, int centerY);
 
-    public void updateShape(Shape shape);
+    /**
+     * Sets new center for representation; used when updating shape,
+     * so shapes of different sizes may be updated
+     *
+     * @param centerX
+     * @param centerY
+     */
+    void setCenterXY(int centerX, int centerY);
 
-    public Shape getShape();
+    /**
+     * Replaces shape for a new one;
+     *
+     * @param shape new shape;
+     */
+    void updateShape(Shape shape);
+
 
 }
 

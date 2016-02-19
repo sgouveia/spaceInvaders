@@ -4,17 +4,17 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 /**
- * Created by codecadet on 15/02/16.
+ * Created by Sérgio Gouveia on 15/02/16.
  */
 public class Board {
 
-    private static final double MARGIN_TOP = 10;
-    private static final double MARGIN_LEFT = 10;
+    private static final double MARGIN_TOP = 10; // Game border
+    private static final double MARGIN_LEFT = 10; // Game border
 
-    public static final int GAME_BORDER = 20;
+    public static final int GAME_BORDER = 25; // border inside board
 
-    public static int width;
-    public static int heigth;
+    public static int width; //in pixels
+    public static int heigth; // in pixels
 
 
     /**

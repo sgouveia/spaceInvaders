@@ -1,7 +1,7 @@
 package org.academiadecodigo.bootcamp.spaceinvaders;
 
 /**
- * Created by codecadet on 15/02/16.
+ * Created by Sérgio Gouveia on 15/02/16.
  */
 public class Main {
 

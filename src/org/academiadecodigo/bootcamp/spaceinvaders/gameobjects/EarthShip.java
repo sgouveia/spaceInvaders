@@ -1,14 +1,14 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 
-import org.academiadecodigo.bootcamp.spaceinvaders.Game;
 import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.SimpleGfxRepresentationFactory;
+import org.academiadecodigo.bootcamp.spaceinvaders.utils.Direction;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 /**
- * Created by codecadet on 15/02/16.
+ * Created by Sérgio Gouveia on 15/02/16.
  */
 public class EarthShip extends GameObject implements KeyboardHandler {
 
@@ -22,7 +22,8 @@ public class EarthShip extends GameObject implements KeyboardHandler {
     /**
      * Constructor
      *
-     * @param representation -
+     * @param representation must use factory method;
+     *                       creates a new factory for generating stingrays. Not the best cena;
      */
     public EarthShip(Representable representation) {
         super(representation);
@@ -31,7 +32,71 @@ public class EarthShip extends GameObject implements KeyboardHandler {
         factory = new SimpleGfxRepresentationFactory();
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
+    public StingRay getStingRay() {
+        return stingRay;
+    }
 
+    /**
+     * moves in direction by speed;
+     */
+    public void move() {
+
+        if (direction == null) {
+            return;
+        }
+
+        int dx = speed;
+        if (direction == Direction.LEFT) {
+            dx = -speed;
+        }
+
+        getRepresentation().move(dx, 0);
+    }
+
+    /**
+     * prepares the shoot; doesn't make the stingray move, but sets shotFired to true;
+     * the game loop then checks for this flag and fires if true;
+     * x and y are the coordinates for the spaceship;
+     */
+    public void makeShoot() {
+
+        if (shotFired) {
+            return;
+        }
+        int x = getRepresentation().getX() + getRepresentation().getWidth() / 2;
+        int y = getRepresentation().getY();
+        stingRay = new StingRay(factory.getGameObject(GameObjectType.STINGRAY, x, y));
+
+        shotFired = true;
+    }
+
+    /**
+     * Getter for shot boolean flag;
+     *
+     * @return
+     */
+    public boolean hasShot() {
+        return shotFired;
+    }
+
+    /**
+     * if the stingray gets an alien or if it leaves the screen,
+     * the object disappears and the ship may shoot again;
+     */
+    public void doneShooting() {
+        stingRay.getRepresentation().getShape().delete();
+        stingRay = null;
+        shotFired = false;
+    }
+
+    /**
+     * sets keyboard events for spaceship - left, right, and shoot;
+     */
     private void setKeyboard() {
         Keyboard k = new Keyboard(this);
 
@@ -60,33 +125,13 @@ public class EarthShip extends GameObject implements KeyboardHandler {
         shoot.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         k.addEventListener(shoot);
 
-
     }
 
-    public void moveRight() {
-        this.move(Direction.RIGHT, speed);
-    }
-
-    public void moveLeft() {
-        this.move(Direction.LEFT, speed);
-    }
-
-    public StingRay getStingRay() {
-        return stingRay;
-    }
-
-    public void makeShoot() {
-
-        if (shotFired) {
-            return;
-        }
-
-        int x = getRepresentation().getX() + getRepresentation().getWidth() / 2;
-        int y = getRepresentation().getY();
-        stingRay = new StingRay(factory.getGameObject(GameObjectType.STINGRAY, x, y));
-        shotFired = true;
-    }
-
+    /**
+     * directions only set the direction; space makes shoot, but doesn't fire.
+     *
+     * @param keyboardEvent
+     */
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
@@ -103,33 +148,15 @@ public class EarthShip extends GameObject implements KeyboardHandler {
         }
     }
 
+    /**
+     * stops the movement by setting direction to null.
+     *
+     * @param keyboardEvent
+     */
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
         this.direction = null;
     }
 
-    public boolean hasShot() {
-        return shotFired;
-    }
-
-    public void doneShooting() {
-        stingRay.getRepresentation().getShape().delete();
-        stingRay = null;
-        shotFired = false;
-    }
-
-    public void move() {
-
-        if (direction == null) {
-            return;
-        }
-
-        int dx = speed;
-        if (direction == Direction.LEFT) {
-            dx = -speed;
-        }
-
-        getRepresentation().move(dx, 0);
-    }
 
 }
