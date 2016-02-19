@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.simplegfx;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**

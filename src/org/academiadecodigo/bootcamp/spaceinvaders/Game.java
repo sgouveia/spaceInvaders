@@ -3,6 +3,7 @@ package org.academiadecodigo.bootcamp.spaceinvaders;
 import org.academiadecodigo.bootcamp.spaceinvaders.gameobjects.*;
 import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.SimpleGfxRepresentationFactory;
 import org.academiadecodigo.bootcamp.spaceinvaders.utils.AliensArray;
+import org.academiadecodigo.bootcamp.spaceinvaders.utils.HitChecker;
 
 /**
  * Created by codecadet on 15/02/16.
@@ -11,13 +12,13 @@ public class Game {
 
     //TODO Método para devolver a representação mais à direita e mais à esquerda (getMostRightX)
 
-    public static final int GAME_SPEED = 5;
     public static final int NUMBER_OF_ALIENS = 50;
-    public static final int DELAY = 200;
+    public static final int DELAY = 15;
 
     Board board = new Board(672, 768);
     EarthShip earthShip;
     AliensArray aliens;
+    HitChecker hitChecker;
 
 
     /**
@@ -43,67 +44,46 @@ public class Game {
             positionerX = 50;
             positionerY += 50;
         }
+        hitChecker = new HitChecker(aliens.getAliveAliens(), earthShip);
     }
 
     public void start() throws InterruptedException {
+        Direction alienDirection = Direction.RIGHT;
+
         while (true) {
             Thread.sleep(DELAY);
-            //TODO Move all aliens;
-            //TODO Check Collider
 
-            for (int i = 0; i < aliens.getAliens().length; i++) {
+            earthShip.move();
 
-                if (aliens.getAliens()[i].getDirection().equals(Direction.RIGHT)) {
-                    if (getMostRightX() < Board.width-20) {
-                        aliens.getAliens()[i].moveRight();
-                    } else {
-                        aliens.getAliens()[i].moveLeft();
-
-                    }
-                } else {
-                    if (getMostLefttX() > 20) {
-                        aliens.getAliens()[i].moveLeft();
-                    } else {
-                        aliens.getAliens()[i].moveRight();
-                    }
-
-                }
+            if (aliens.getLeftX() <= Board.GAME_BORDER) {
+                alienDirection = Direction.RIGHT;
+            } else if (aliens.getRightX() >= Board.width - Board.GAME_BORDER) {
+                alienDirection = Direction.LEFT;
             }
 
+            aliens.moveAliveAliens(alienDirection);
 
-            if (earthShip.hasShot()) {
-                earthShip.shoot();
-
+            if (earthShip.hasShot()){
+                earthShip.getStingRay().moveUp();
             }
 
+            if (hitChecker.stingRayCollision()) {
+                earthShip.doneShooting();
+                hitChecker.updateAliveAliens(aliens.getAliveAliens());
+            }
 
-            // quando o tiro acerta em algum inimigo, ou sai do mapa -- earthship.doneShooting();
-        }
-
-
-    }
-
-    private int getMostRightX() {
-        int x = 0;
-        for (int i = 0; i < aliens.getAliens().length; i++) {
-            if (aliens.getAliens()[i].getRepresentation().getX() > x) {
-                x = aliens.getAliens()[i].getRepresentation().getX();
+            for (Alien a: aliens.getDeadAliens()){
+                a.clean();
             }
         }
-        return x;
+
+
+        // quando o tiro acerta em algum inimigo, ou sai do mapa -- earthship.doneShooting();
     }
 
 
-    private int getMostLefttX() {
-        int x = Board.width;
-        for (int i = 0; i < aliens.getAliens().length; i++) {
-            if (aliens.getAliens()[i].getRepresentation().getX() < x) {
-                x = aliens.getAliens()[i].getRepresentation().getX();
-            }
-        }
-        return x;
-    }
 }
+
 
 
 

@@ -1,9 +1,7 @@
 package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 
 
-import org.academiadecodigo.bootcamp.spaceinvaders.Board;
 import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.SimpleGfxRepresentation;
-import org.academiadecodigo.simplegraphics.graphics.Movable;
 
 /**
  * Created by codecadet on 15/02/16.
@@ -11,7 +9,6 @@ import org.academiadecodigo.simplegraphics.graphics.Movable;
 public abstract class GameObject {
 
     Representable representation;
-    Direction direction;
 
     public GameObject(Representable representation){
         this.representation = representation;
@@ -21,30 +18,18 @@ public abstract class GameObject {
         return representation;
     }
 
-    public  void setDirection(Direction direction){
-        this.direction = direction;
-    }
-
-    public void move(Direction direction){
+    public void move(Direction direction, int speed){
 
         SimpleGfxRepresentation unit = (SimpleGfxRepresentation) representation;
-        this.direction = direction;
         switch(direction){
-            case UP: unit.move(0,-1);
+            case UP: unit.move(0,-speed);
                 break;
-            case DOWN: unit.move(0,1);
+            case DOWN: unit.move(0,speed);
                 break;
-            case LEFT: unit.move(-1,0);
+            case LEFT: unit.move(-speed,0);
                 break;
-            case RIGHT: unit.move(1,0);
+            case RIGHT: unit.move(speed,0);
                 break;
         }
     }
-
-
-
-    public Direction getDirection() {
-        return direction;
-    }
-
 }

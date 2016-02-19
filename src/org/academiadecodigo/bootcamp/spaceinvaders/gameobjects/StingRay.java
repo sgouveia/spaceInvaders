@@ -14,16 +14,22 @@ public class StingRay extends GameObject {
     public StingRay(Representable representation) {
         super(representation);
 
-        speed = Game.GAME_SPEED ;
+        speed = 10;
     }
 
-        public void moveUp(){
-            for (int i = 0; i < speed ; i++) {
-                this.move(Direction.UP);
-            }
-        }
+    public void moveUp() {
+        this.move(Direction.UP, speed);
+    }
 
+    public int getCenterY() {
+        int y = getRepresentation().getY();
+        int height = getRepresentation().getHeight();
+        return y + height / 2;
+    }
 
-
-
+    public int getCenterX(){
+        int x = getRepresentation().getX();
+        int width = getRepresentation().getWidth();
+        return x + width/2;
+    }
 }

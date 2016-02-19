@@ -11,8 +11,11 @@ public class Board {
     private static final double MARGIN_TOP = 10;
     private static final double MARGIN_LEFT = 10;
 
+    public static final int GAME_BORDER = 20;
+
     public static int width;
     public static int heigth;
+
 
     /**
      * Constructor

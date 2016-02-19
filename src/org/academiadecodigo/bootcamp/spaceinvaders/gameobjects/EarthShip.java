@@ -2,7 +2,6 @@ package org.academiadecodigo.bootcamp.spaceinvaders.gameobjects;
 
 import org.academiadecodigo.bootcamp.spaceinvaders.Game;
 import org.academiadecodigo.bootcamp.spaceinvaders.simplegfx.SimpleGfxRepresentationFactory;
-import org.academiadecodigo.bootcamp.spaceinvaders.utils.AliensArray;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -15,17 +14,19 @@ public class EarthShip extends GameObject implements KeyboardHandler {
 
 
     private int speed;
-    private boolean shot;
+    private Direction direction;
+    private boolean shotFired;
     private SimpleGfxRepresentationFactory factory;
     private StingRay stingRay;
 
     /**
      * Constructor
+     *
      * @param representation -
      */
-    public EarthShip(Representable representation){
+    public EarthShip(Representable representation) {
         super(representation);
-        speed = Game.GAME_SPEED + 20;
+        speed = 5;
         setKeyboard();
         factory = new SimpleGfxRepresentationFactory();
     }
@@ -39,10 +40,20 @@ public class EarthShip extends GameObject implements KeyboardHandler {
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         k.addEventListener(left);
 
+        KeyboardEvent leftUp = new KeyboardEvent();
+        leftUp.setKey(KeyboardEvent.KEY_LEFT);
+        leftUp.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        k.addEventListener(leftUp);
+
         KeyboardEvent right = new KeyboardEvent();
         right.setKey(KeyboardEvent.KEY_RIGHT);
         right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         k.addEventListener(right);
+
+        KeyboardEvent rightUp = new KeyboardEvent();
+        rightUp.setKey(KeyboardEvent.KEY_RIGHT);
+        rightUp.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        k.addEventListener(rightUp);
 
         KeyboardEvent shoot = new KeyboardEvent();
         shoot.setKey(KeyboardEvent.KEY_SPACE);
@@ -52,57 +63,73 @@ public class EarthShip extends GameObject implements KeyboardHandler {
 
     }
 
-    public void moveRight(){
-        for (int i = 0; i < speed ; i++) {
-            this.move(Direction.RIGHT);
-        }
+    public void moveRight() {
+        this.move(Direction.RIGHT, speed);
     }
 
-    public void moveLeft(){
-        for (int i = 0; i < speed ; i++) {
-            this.move(Direction.LEFT);
-        }
+    public void moveLeft() {
+        this.move(Direction.LEFT, speed);
     }
 
-    public void shoot(){
+    public StingRay getStingRay() {
+        return stingRay;
+    }
 
-        stingRay = new StingRay (factory.getGameObject(GameObjectType.STINGRAY, getRepresentation().getX(), getRepresentation().getY()));
-        stingRay.moveUp();
-        System.out.println("done shooting");
-        if (hasShot()) {
+    public void makeShoot() {
+
+        if (shotFired) {
             return;
         }
-        }
 
+        int x = getRepresentation().getX() + getRepresentation().getWidth() / 2;
+        int y = getRepresentation().getY();
+        stingRay = new StingRay(factory.getGameObject(GameObjectType.STINGRAY, x, y));
+        shotFired = true;
+    }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_LEFT:
-                moveLeft();
+                this.direction = Direction.LEFT;
                 break;
             case KeyboardEvent.KEY_RIGHT:
-                moveRight();
+                this.direction = Direction.RIGHT;
                 break;
-
             case KeyboardEvent.KEY_SPACE:
-                //shoot();
-                shot = true;
+                makeShoot();
                 break;
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-
+        this.direction = null;
     }
 
     public boolean hasShot() {
-        return shot;
+        return shotFired;
     }
 
     public void doneShooting() {
-        shot = false;
+        stingRay.getRepresentation().getShape().delete();
+        stingRay = null;
+        shotFired = false;
     }
+
+    public void move() {
+
+        if (direction == null) {
+            return;
+        }
+
+        int dx = speed;
+        if (direction == Direction.LEFT) {
+            dx = -speed;
+        }
+
+        getRepresentation().move(dx, 0);
+    }
+
 }
