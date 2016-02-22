@@ -11,6 +11,19 @@ import org.academiadecodigo.bootcamp.spaceinvaders.utils.HitChecker;
  */
 public class Game {
 
+    /*
+    Important TODOS:
+    TODO The aliens must drop one line down and THEN go in the opposite direction;
+    TODO The aliens' speed must increase as the drop a line;
+    TODO Earth ship must have boundaries on the right and left screen;
+    TODO Create score and (maybe) highscore;
+    TODO Set game over;
+    TODO Create intro screen;
+    TODO Create bonus alien on top of screen;
+    TODO Make aliens shoot against earthship;
+    TODO Create shields.
+     */
+
     public static final int NUMBER_OF_ALIENS = 50; // number of regular aliens;
     public static final int DELAY = 15; //miliseconds;
 
@@ -47,6 +60,7 @@ public class Game {
             positionerX = 50;
             positionerY += 50;
         }
+
 
         hitChecker = new HitChecker(aliens.getAliveAliens(), earthShip);
     }
@@ -94,7 +108,10 @@ public class Game {
             for (Alien a : aliens.getDeadAliens()) {
                 a.clean();
             }
+
+
         }
+
     }
 }
 
