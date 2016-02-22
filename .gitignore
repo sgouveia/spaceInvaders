@@ -1,4 +1,6 @@
-reated by https://www.gitignore.io/api/intellij,osx
+created by https://www.gitignore.io/api/intellij,osx
+
+build/
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
